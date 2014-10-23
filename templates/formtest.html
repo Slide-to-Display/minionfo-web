@@ -8,6 +8,10 @@ $def with (form)
 	    <!-- jQuery -->
 	    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	    
+	    <!-- jQueryUI -->
+	    <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+	    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+	    
 	    <!-- bootstrap files -->
 	    <!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
@@ -19,7 +23,21 @@ $def with (form)
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 	    
 	    <script src="MainScript.js"></script>
-    
+    	<style>
+    		.left-inner-icon input{
+    			padding-left:30px;
+    		}
+    		.left-inner-icon span{
+    			position:absolute;
+    			left:15px;
+    			padding:10px 12px;
+    			pointer-events:none;
+    		}
+    		.full-width{
+    			width:100%;
+    		}
+    		
+    	</style>
     </head>
 
 	<body>
@@ -37,8 +55,9 @@ $def with (form)
 		
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		      <ul class="nav navbar-nav navbar-right">
-		        <li><a href="#">Login</a></li>
-		        <li><a href="#">Register</a></li>
+		        <li><button id="login-btn" class="btn btn-default navbar-btn">Login</button></li>
+		        <li>&nbsp;</li>
+		        <li><button id="register-btn" class="btn btn-default navbar-btn">Register</button></li>
 		      </ul>
 		    </div>
 		  </div>
@@ -48,10 +67,79 @@ $def with (form)
 			<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 			<strong>Success!</strong> Slide to display!
 		</div>
-		<form name="main" method="post">
-		$if not form.valid: <p class="error">Try again, AmeriCAN:</p>
-		$:form.render()
-		<input class="btn btn-default btn-lg" type="submit" />    
-		</form>
+		
+		<div class="fluid-container">
+		<div class="row">
+			<div class="col-md-2"></div>
+			<div class="col-md-8">
+				<form class="form-horizontal" role="form" name="main" method="post">
+				
+					<div class="form-group">
+						<div class="col-md-2"></div>
+						
+						<div class="col-md-7">
+							<div class="left-inner-icon">
+								<span class="glyphicon glyphicon-search"></span>
+								<input class="form-control" type="text" placeholder="Enter the keyword to be searched" />
+							</div>
+							<p>Popular search: Apple live, iPhone 6, ...</p>
+							$if not form.valid: <p class="error">Try again, AmeriCAN:</p>
+							$:form.render()
+							
+						</div>
+						
+						<div class="col-md-1">
+							<input class="btn btn-primary" type="submit"/>    
+						</div>
+						
+						<div class="col-md-2"></div>
+					
+					</div>
+					
+					<div class="form-group">
+						<div class="col-md-2"></div>
+						<div class="col-md-4">
+							<div class="input-group">
+								<div class="input-group-addon">From: </div><input id="datetime-start" class="form-control" type="datetime" /><div class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></div>
+							</div>
+							
+						</div>
+						<div class="col-md-4">
+							<select id="location" class="from-control full-width">
+								<option>location</option>
+								<option>Worldwide</option>
+								<option>US</option>
+							</select>
+						</div>
+						<div class="col-md-2"></div>
+					</div>
+					
+					<div class="form-group">
+						<div class="col-md-2"></div>
+						<div class="col-md-4">
+							<div class="input-group">
+								<div class="input-group-addon">To: </div><input id="datetime-end" class="form-control" type="datetime" /><div class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></div>
+							</div>
+							
+						</div>
+						<div class="col-md-4">
+							<select id="language" class="from-control full-width">
+								<option>Language</option>
+								<option>English</option>
+								<option>China</option>
+							</select>
+						</div>
+						<div class="col-md-2"></div>
+					</div>
+					
+					<div class="col-md-1"></div>
+					
+					</div>
+				
+				</form>
+			</div>
+			<div class="col-md-2"></div>
+		</div>
+		</div>
 	</body>
 </html>
