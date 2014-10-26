@@ -3,13 +3,15 @@ from web import form
 import sys
 sys.path.append('./code')
 import GetStateList
-import TwitterStream
+#import TwitterStream
 import Display
 import GetLatiLongi
 
 
 urls = (
-    '/', 'index',
+    r'/', 'index',
+	r'/index', 'index',
+	r'/(.*\.js)', 'javascript'
 )
 app = web.application(urls, globals())
 
@@ -23,7 +25,12 @@ class index:
         return render.formtest(form)
 
     def POST(self):
-        webinput = web.input()
+        postdata = web.data()
+        postdata = postdata.split("&")
+        webinput=dict()
+        for pair in postdata:
+            pair=pair.split("=")
+            webinput[pair[0]]=pair[1]
         keywords = webinput['Keywords'].encode("utf-8")
         language = webinput['Language'].encode("utf-8")
         time = webinput['Time']
@@ -37,6 +44,14 @@ class index:
                                                            lang=languages,
                                                            lim=int(time),
                                                            loca=LatiLongi))
+class javascript:
+	def GET(self, file):
+		try:
+			f=open(file, 'r')
+			return f.read()
+		except:
+			return file+" 404 Not Found"
+			
 text = form.Form(
     form.Textarea('Keywords', rows=1, cols=50, value=''),
     form.Dropdown('Language', [('en', 'English')]),
