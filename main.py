@@ -11,7 +11,9 @@ import GetLatiLongi
 urls = (
     r'/', 'index',
 	r'/index', 'index',
-	r'/(.*\.js)', 'javascript'
+	r'/(.*\.js)', 'javascript',
+    r'/login', 'login',
+    r'/register', 'register'
 )
 app = web.application(urls, globals())
 

@@ -42,6 +42,60 @@ $def with (form)
     </head>
 
 	<body>
+        <!-- Popup for user login -->
+       
+        <div class="modal fade" id="user-login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Login</h4>
+                    </div>
+                    <div class="well">
+                        <form role="form" method="post" autocomplete="on" action="/login">
+                            <div class="form-group">
+                                <input id="login-username" name="username" class="form-control" type="text" placeholder="User Name" />
+                            </div>
+                            <div class="form-group">
+                                <input id="login-password" name="password" class="form-control" type="password" placeholder="Password" />
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control btn-primary" type="submit" value="Submit" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="user-register" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="H1">Register</h4>
+                    </div>
+                    <div class="well">
+                        <form role="form" method="post" autocomplete="on" action="/register">
+                            <div class="form-group">
+                                <input id="register-username" name="username" class="form-control" type="text" placeholder="User Name" />
+                            </div>
+                            <div class="form-group">
+                                <input id="password" name="password" class="form-control" type="password" placeholder="Password" />
+                            </div>
+                            <div class="form-group">
+                                <input id="password-again" name="password" class="form-control" type="password" placeholder="Password" />
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control btn-primary" type="submit" value="Submit" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
 		<nav class="navbar navbar-default" role="navigation">
 		  <div class="container-fluid">
 		    <div class="navbar-header">
@@ -56,9 +110,9 @@ $def with (form)
 		
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		      <ul class="nav navbar-nav navbar-right">
-		        <li><button id="login-btn" class="btn btn-default navbar-btn">Login</button></li>
+		        <li><button id="login-btn" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#user-login">Login</button></li>
 		        <li>&nbsp;</li>
-		        <li><button id="register-btn" class="btn btn-default navbar-btn">Register</button></li>
+		        <li><button id="register-btn" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#user-register">Register</button></li>
 		      </ul>
 		    </div>
 		  </div>
