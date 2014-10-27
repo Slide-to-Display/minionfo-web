@@ -24,7 +24,7 @@ class StdOutListener(StreamListener):
 
 
 def TwitterStream(kwords, lang=['en'], lim=1, loca=[-180,-90,180,90]):
-    print kwords, lang, lim, loca
+    # print kwords, lang, lim, loca
     # try: os.makedirs(os.getcwd() + '/output')
     # except: pass
     # global out
@@ -50,6 +50,10 @@ if __name__ == '__main__':
     import json
     for i in TwitterStream(['iphone']):
         d = json.loads(i)
+        for j in d.keys(): 
+            print j
+            print d[j]
+            print
         # print d['lang']
         # print d['place']
         print ''
