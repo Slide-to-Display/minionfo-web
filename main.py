@@ -3,15 +3,15 @@ from web import form
 import sys
 sys.path.append('./code')
 import GetStateList
-#import TwitterStream
+import TwitterStream
 import Display
 import GetLatiLongi
 
 
 urls = (
     r'/', 'index',
-	r'/index', 'index',
-	r'/(.*\.js)', 'javascript',
+    r'/index', 'index',
+    r'/(.*\.js)', 'javascript',
     r'/login', 'login',
     r'/register', 'register'
 )
@@ -46,13 +46,15 @@ class index:
                                                            lang=languages,
                                                            lim=int(time),
                                                            loca=LatiLongi))
+
 class javascript:
-	def GET(self, file):
-		try:
-			f=open(file, 'r')
-			return f.read()
-		except:
-			return file+" 404 Not Found"
+    def GET(self, file):
+        try:
+            f = open(file, 'r')
+            return f.read()
+        except:
+            return file + " 404 Not Found"
+
 			
 text = form.Form(
     form.Textarea('Keywords', rows=1, cols=50, value=''),

@@ -9,7 +9,8 @@ def Display(data):
         place = 'None'
         if d['place'] != None:
             place = d['place']['full_name'].encode("utf-8")
-        results.append('%s\n%s\n' % (content, place))
+        # results.append('%s\n%s\n' % (content, place))
+        results.append('%s\n' % content)
 
     return '\n\n'.join(results)
     
