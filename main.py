@@ -47,6 +47,50 @@ class index:
                                                            lim=int(time),
                                                            loca=LatiLongi))
 
+
+class login:
+    def POST(self):
+        postdata = web.data()
+        postdata = postdata.split("&")
+        webinput=dict()
+        for pair in postdata:
+            pair=pair.split("=")
+            webinput[pair[0]]=pair[1]
+        username = webinput['username'].encode("utf-8")
+        passwd = webinput['password'].encode("utf-8")
+        f = open('./data/userinfo', 'r')
+        userinfo = dict()
+        for line in f:
+            nline = line.strip().split('\t')
+            userinfo[nline[0]] = nline[1]
+        if username not in userinfo:
+            return 'User name does not exist'
+        else:
+            if userinfo[username] != passwd:
+                return 'Wrong password'
+            else:
+                return 'Successful'
+
+
+class register:
+    def POST(self):
+        postdata = web.data()
+        postdata = postdata.split("&")
+        webinput=dict()
+        for pair in postdata:
+            pair=pair.split("=")
+            webinput[pair[0]]=pair[1]
+        username = webinput['username'].encode("utf-8")
+        passwd = webinput['password'].encode("utf-8")
+        passwda = webinput['passwordagain'].encode("utf-8")
+        if passwd != passwda:
+            return 'Invalid Password!'
+        else:
+            out = open('./data/userinfo', 'aw')
+            out.write('%s\t%s\n' % (username, passwd))
+            return 'Successful'
+
+
 class javascript:
     def GET(self, file):
         try:
