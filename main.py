@@ -42,6 +42,7 @@ class index:
         languages = list()
         languages.append(language)
         LatiLongi = GetLatiLongi.GetLatiLongi()[location]
+        return True
         return Display.Display(TwitterStream.TwitterStream(kwords=keywords,
                                                            lang=languages,
                                                            lim=int(time),
