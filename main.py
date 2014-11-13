@@ -1,5 +1,6 @@
 import web
 from web import form
+import hashlib
 import sys
 sys.path.append('./code')
 import GetStateList
@@ -42,10 +43,10 @@ class index:
         languages = list()
         languages.append(language)
         LatiLongi = GetLatiLongi.GetLatiLongi()[location]
-        return True
+
         return Display.Display(TwitterStream.TwitterStream(kwords=keywords,
                                                            lang=languages,
-                                                           lim=int(time),
+                                                           lim=time,
                                                            loca=LatiLongi))
 
 
@@ -67,10 +68,11 @@ class login:
         if username not in userinfo:
             return 'User name does not exist'
         else:
-            if userinfo[username] != passwd:
+            if userinfo[username] != hashlib.md5(passwd).hexdigest():
                 return 'Wrong password'
             else:
-                return 'Successful'
+                form = text()
+                return render.formtest2(form, username)
 
 
 class register:
@@ -88,8 +90,8 @@ class register:
             return 'Invalid Password!'
         else:
             out = open('./data/userinfo', 'aw')
-            out.write('%s\t%s\n' % (username, passwd))
-            return 'Successful'
+            out.write('%s\t%s\n' % (username, hashlib.md5(passwd).hexdigest()))
+            return 'Successful, %s' % username
 
 
 class javascript:
