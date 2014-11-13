@@ -1,3 +1,5 @@
+# ruturn latitude and longitude of each location
+
 def GetLatiLongi():
     import os
     path = os.path.dirname(os.path.abspath(__file__))

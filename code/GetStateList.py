@@ -1,3 +1,5 @@
+# return a list of US stetes
+
 def GetStateList():
     import os
     path = os.path.dirname(os.path.abspath(__file__))

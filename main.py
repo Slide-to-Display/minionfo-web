@@ -1,3 +1,5 @@
+# main function
+
 import web
 from web import form
 import hashlib
@@ -23,11 +25,11 @@ render = web.template.render('templates/')
 
 
 class index:
-    def GET(self):
+    def GET(self): # get method
         form = text()
         return render.formtest(form)
 
-    def POST(self):
+    def POST(self): # post method
         postdata = web.data()
         postdata = postdata.split("&")
         webinput=dict()

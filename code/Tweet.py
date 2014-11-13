@@ -1,3 +1,5 @@
+# Tweet class
+
 class Tweet:
 	def __init__(self, _tweet, _geo, _sentiment = ""):
 		self.tweet = _tweet.strip()
