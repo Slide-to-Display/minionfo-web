@@ -78,13 +78,13 @@ $def with (form)
                     <div class="well">
                         <form role="form" method="post" autocomplete="on" action="/register">
                             <div class="form-group">
-                                <input id="register-username" name="username" class="form-control" type="text" placeholder="User Name" />
+                                <input id="register-username" name="username" class="form-control" type="text" placeholder="User Name (Email only)" pattern="[^ @]*@[^ @]*" />
                             </div>
                             <div class="form-group">
-                                <input id="password" name="password" class="form-control" type="password" placeholder="Password" />
+                                <input id="password" name="password" class="form-control" type="password" placeholder="Password" required="required"/>
                             </div>
                             <div class="form-group">
-                                <input id="password-again" name="passwordagain" class="form-control" type="password" placeholder="Password" />
+                                <input id="password-again" name="passwordagain" class="form-control" type="password" placeholder="Password Again" required="required"/>
                             </div>
                             <div class="form-group">
                                 <input class="form-control btn-primary" type="submit" value="Submit" />
@@ -135,7 +135,7 @@ $def with (form)
 						    <div class="col-md-7">
 							    <div class="left-inner-icon">
 								    <span class="glyphicon glyphicon-search"></span>
-								    <input class="form-control" type="text" name="Keywords" placeholder="Enter the keyword to be searched" />
+								    <input class="form-control" type="text" name="Keywords" placeholder="Enter the keyword to be searched" required="required"/>
 							    </div>
 							    <!-- <p>Popular search: Apple live, iPhone 6, ...</p> -->
 							
@@ -158,7 +158,7 @@ $def with (form)
                             <div class="col-md-8">
                                 <h4>#Tweets</h4>
                                 <select id="time" class="form-control full-width" name="Time">
-                                    <option value="5">Lateset 5</option>
+                                    <option value="5">Latest 5</option>
                                     <option value="10">Latest 10</option>
                                 </select>
 							

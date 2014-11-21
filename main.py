@@ -5,6 +5,7 @@ from web import form
 import hashlib
 import sys
 sys.path.append('./code')
+import re
 import GetStateList
 import TwitterStream
 import Display
@@ -38,8 +39,13 @@ class index:
             webinput[pair[0]]=pair[1]
         keywords = webinput['Keywords'].encode("utf-8")
         language = webinput['Language'].encode("utf-8")
-        time = webinput['Time']
         location = webinput['Location']
+        if 'Time' in webinput.keys():
+            time = webinput['Time']
+        else:
+            time = (webinput['day'], webinput['hour'], 
+                    webinput['minute'],webinput['second'])
+            print time
 
         keywords = keywords.split(' ')
         languages = list()
@@ -74,7 +80,7 @@ class login:
                 return 'Wrong password'
             else:
                 form = text()
-                return render.formtest2(form, username)
+                return render.formtest2(form, username.replace('%40', '@'))
 
 
 class register:
@@ -85,15 +91,19 @@ class register:
         for pair in postdata:
             pair=pair.split("=")
             webinput[pair[0]]=pair[1]
-        username = webinput['username'].encode("utf-8")
+        username = webinput['username']
         passwd = webinput['password'].encode("utf-8")
         passwda = webinput['passwordagain'].encode("utf-8")
         if passwd != passwda:
             return 'Invalid Password!'
+        print username
+        print re.match('[^@]+@[^@]+\.[^@]+', username)
+        if re.match('[^@]+%40[^@]+\.[^@]+', username) == None:
+            return 'Please use email as username'
         else:
             out = open('./data/userinfo', 'aw')
             out.write('%s\t%s\n' % (username, hashlib.md5(passwd).hexdigest()))
-            return 'Successful, %s' % username
+            return 'Successful, %s' % username.replace('%40', '@')
 
 
 class javascript:

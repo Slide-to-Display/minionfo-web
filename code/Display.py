@@ -4,12 +4,23 @@ import json
 import process_tweets
 
 
-
 def Display(data):
     results = list()
 
     tweets, processed_tweets = process_tweets.extract_fetched_tweets(data)
     process_tweets.analyse_tweets(tweets, processed_tweets)
+    pos = 0
+    neg = 0
+    net = 0
+    for tweet in tweets:
+        if tweet.sentiment == 'Positive':
+            pos += 1
+        elif tweet.sentiment == 'Negative':
+            neg += 1
+        elif tweet.sentiment == 'Neutral':
+            net += 1
+    results.append('Statistics:\n Total: %s\n Positive: %s\n Negative: %s\n Neutral:%s\n\n' \
+                   % (len(tweets), pos, neg, net))
     for tweet in tweets:
         results.append('text: %s\nsentiment: %s\n===\n' \
                        % (tweet.tweet, tweet.sentiment))

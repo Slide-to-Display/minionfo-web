@@ -95,7 +95,7 @@ $def with (form, username)
 						    <div class="col-md-7">
 							    <div class="left-inner-icon">
 								    <span class="glyphicon glyphicon-search"></span>
-								    <input class="form-control" type="text" name="Keywords" placeholder="Enter the keyword to be searched" />
+								    <input class="form-control" type="text" name="Keywords" placeholder="Enter the keyword to be searched" required="required"/>
 							    </div>
 							    <!-- <p>Popular search: Apple live, iPhone 6, ...</p> -->
 							
@@ -117,13 +117,15 @@ $def with (form, username)
                                 </div>-->
                             <div class="col-md-8">
                                 <h4>Time Range</h4>
-                                <select id="time" class="form-control full-width" name="Time">
-                                    <option value="5s">5 seconds</option>
-                                    <option value="1h">1 Hour</option>
-                                    <option value="2h">2 Hours</option>
-                                    <option value="12h">12 Hours</option>
-                                    <option value="24h">24 Hours</option>
-                                </select>
+<input type="text" name="day" size="5"/ pattern="[0-9]" value="0"> Days <input type="text" name="hour" size="5" pattern="[0-9]" value="0"/> Hours <input type="text" name="minute" size="5" pattern="[0-9]" value="0"/> Minutes <input type="text" name="second" size="5" pattern="[0-9]" value="5"/> Seconds
+
+                                <!-- <select id="time" class="form-control full-width" name="Time"> -->
+                                <!--     <option value="5s">5 seconds</option> -->
+                                <!--     <option value="1h">1 Hour</option> -->
+                                <!--     <option value="2h">2 Hours</option> -->
+                                <!--     <option value="12h">12 Hours</option> -->
+                                <!--     <option value="24h">24 Hours</option> -->
+                                <!-- </select> -->
 							
                                 <h4>Location</h4>
 							    <select id="location" class="form-control full-width" name="Location">

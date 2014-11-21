@@ -5,6 +5,7 @@ from tweepy import OAuthHandler
 from tweepy import Stream
 import os
 import time
+import json
 
 
 consumer_key = "xE6YyJ7KDH3f3JhJb8TkMA"
@@ -15,7 +16,8 @@ access_token_secret = "QSWxzGjDXkGV1KwMSWdGZEvntqoEfGTureqfnUZOm8"
 
 class StdOutListener(StreamListener):
     def on_data(self, data):
-        results.append(data)
+        if json.loads(data)['lang'] == 'en' and 'text' in data:
+            results.append(data)
         if len(results) < limit:
             return True
         else:
@@ -27,7 +29,7 @@ class StdOutListener(StreamListener):
 
 class StdOutListener_time(StreamListener):
     def on_data(self, data):
-        if 'text' in data:
+        if json.loads(data)['lang'] == 'en' and 'text' in data:
             results.append(data)
         # print data
         if time.time() < limit:
@@ -39,18 +41,21 @@ class StdOutListener_time(StreamListener):
         print status
 
 
-def TwitterStream(kwords, lang=['en'], lim='1', loca=[-180,-90,180,90]):
+def TwitterStream(kwords, lim, lang=['en'], loca=[-180,-90,180,90]):
     # print kwords, lang, lim, loca
     global limit
-    if 's' not in lim and 'h' not in lim:
+    if type(lim) != tuple:
         l = StdOutListener()
         limit = int(lim)
     else:
+        day = int(lim[0])
+        hour = int(lim[1])
+        minute = int(lim[2])
+        second = int(lim[3])
         l = StdOutListener_time()
-        if lim == '5s':
-            limit = time.time() + 5
-        else:
-            limit = time.time() + 3600 * int(lim.replace('h', ''))
+        print time.time()
+        limit = time.time() + 86400 * day + 3600 * hour + 60 * minute + 1 * second
+        print limit
 
     auth = OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
@@ -59,7 +64,8 @@ def TwitterStream(kwords, lang=['en'], lim='1', loca=[-180,-90,180,90]):
     results = list()
     stream = Stream(auth, l)
 
-    stream.filter(track=kwords, languages=lang, locations = loca)
+    # print kwords, lang
+    stream.filter(track=kwords, languages=['en'])
     # def filter(self, follow=None, track=None, async=False, locations=None,
     #            stall_warnings=False, languages=None, encoding='utf8'):
     return results
@@ -67,10 +73,11 @@ def TwitterStream(kwords, lang=['en'], lim='1', loca=[-180,-90,180,90]):
 
 if __name__ == '__main__':
     import json
-    for i in TwitterStream(['iphone'], lim = '5s'):
-        print i
+    for i in TwitterStream(['iphone'], lim='1'):
+        # print i
         d = json.loads(i)
-        print d['text']
-        print d['lang']
-        print d['place']
-        print ''
+        print d.keys()
+        # print d['text']
+        # print d['lang']
+        # print d['place']
+        # print ''
