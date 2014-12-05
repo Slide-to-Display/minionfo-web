@@ -1,5 +1,6 @@
 # return a list of US stetes
 
+
 def GetStateList():
     import os
     path = os.path.dirname(os.path.abspath(__file__))
@@ -10,15 +11,16 @@ def GetStateList():
         result.append((nline[0].lower(), nline[0]))
     return result
 
+
 def GetStateList1(name):
     import os
     path = os.path.dirname(os.path.abspath(__file__))
-    f = open(path + "/"+name, 'r')
+    f = open(path + "/" + name, 'r')
     result = list()
     for line in f:
         nline = line.split('\t')
         result.append((nline[0].lower(), nline[0]))
-    return result	
+    return result
 
 
 if __name__ == "__main__":

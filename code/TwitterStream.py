@@ -15,6 +15,7 @@ access_token_secret = "QSWxzGjDXkGV1KwMSWdGZEvntqoEfGTureqfnUZOm8"
 
 
 class StdOutListener(StreamListener):
+
     def on_data(self, data):
         if json.loads(data)['lang'] == 'en' and 'text' in data:
             results.append(data)
@@ -28,6 +29,7 @@ class StdOutListener(StreamListener):
 
 
 class StdOutListener_time(StreamListener):
+
     def on_data(self, data):
         if json.loads(data)['lang'] == 'en' and 'text' in data:
             results.append(data)
@@ -41,7 +43,7 @@ class StdOutListener_time(StreamListener):
         print status
 
 
-def TwitterStream(kwords, lim, lang=['en'], loca=[-180,-90,180,90]):
+def TwitterStream(kwords, lim, lang=['en'], loca=[-180, -90, 180, 90]):
     # print kwords, lang, lim, loca
     global limit
     if type(lim) != tuple:
@@ -54,7 +56,8 @@ def TwitterStream(kwords, lim, lang=['en'], loca=[-180,-90,180,90]):
         second = int(lim[3])
         l = StdOutListener_time()
         print time.time()
-        limit = time.time() + 86400 * day + 3600 * hour + 60 * minute + 1 * second
+        limit = time.time() + 86400 * day + 3600 * \
+            hour + 60 * minute + 1 * second
         print limit
 
     auth = OAuthHandler(consumer_key, consumer_secret)

@@ -26,25 +26,26 @@ render = web.template.render('templates/')
 
 
 class index:
-    def GET(self): # get method
+
+    def GET(self):  # get method
         form = text()
         return render.formtest(form)
 
-    def POST(self): # post method
+    def POST(self):  # post method
         postdata = web.data()
         postdata = postdata.split("&")
-        webinput=dict()
+        webinput = dict()
         for pair in postdata:
-            pair=pair.split("=")
-            webinput[pair[0]]=pair[1]
+            pair = pair.split("=")
+            webinput[pair[0]] = pair[1]
         keywords = webinput['Keywords'].encode("utf-8")
         language = webinput['Language'].encode("utf-8")
         location = webinput['Location']
         if 'Time' in webinput.keys():
             time = webinput['Time']
         else:
-            time = (webinput['day'], webinput['hour'], 
-                    webinput['minute'],webinput['second'])
+            time = (webinput['day'], webinput['hour'],
+                    webinput['minute'], webinput['second'])
             print time
 
         keywords = keywords.split(' ')
@@ -59,13 +60,14 @@ class index:
 
 
 class login:
+
     def POST(self):
         postdata = web.data()
         postdata = postdata.split("&")
-        webinput=dict()
+        webinput = dict()
         for pair in postdata:
-            pair=pair.split("=")
-            webinput[pair[0]]=pair[1]
+            pair = pair.split("=")
+            webinput[pair[0]] = pair[1]
         username = webinput['username'].encode("utf-8")
         passwd = webinput['password'].encode("utf-8")
         f = open('./data/userinfo', 'r')
@@ -84,13 +86,14 @@ class login:
 
 
 class register:
+
     def POST(self):
         postdata = web.data()
         postdata = postdata.split("&")
-        webinput=dict()
+        webinput = dict()
         for pair in postdata:
-            pair=pair.split("=")
-            webinput[pair[0]]=pair[1]
+            pair = pair.split("=")
+            webinput[pair[0]] = pair[1]
         username = webinput['username']
         passwd = webinput['password'].encode("utf-8")
         passwda = webinput['passwordagain'].encode("utf-8")
@@ -107,6 +110,7 @@ class register:
 
 
 class javascript:
+
     def GET(self, file):
         try:
             f = open(file, 'r')
@@ -114,7 +118,7 @@ class javascript:
         except:
             return file + " 404 Not Found"
 
-			
+
 text = form.Form(
     form.Textarea('Keywords', rows=1, cols=50, value=''),
     form.Dropdown('Language', [('en', 'English')]),
@@ -123,5 +127,5 @@ text = form.Form(
 )
 
 
-if __name__ == "__main__": 
+if __name__ == "__main__":
     app.run()
